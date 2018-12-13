@@ -1,0 +1,105 @@
+﻿@model IEnumerable<Vestforsyningen.Models.Opgaver>
+
+@{
+    ViewBag.Title = "Oversigt";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Oversigt over opgaver</h2>
+<div class="row">
+    <div class="col-lg-5" style="float:left;">
+        <p>
+            @Html.ActionLink("Ny Opgave", "Create")
+        </p>
+    </div>
+    <div class="col-lg-6" style="float:right; text-align:right;">
+        
+        @Html.Partial("_LoginPartial")
+        @using (Html.BeginForm())
+    {
+        <p>
+            @Html.TextBox("SearchString", null, new { @class = "form-control", @style = "display:inline-block;width:150px;", placeholder = "Søg på adresse", onfocus = "this.value=''" })
+            <input type="submit" class="btn btn-primary" style="background-color:#c00848; border:none; width:58px;" value="Søg" />
+
+        </p>
+}
+    </div>
+</div>
+<table>
+    <thead>
+        <tr>
+            <th>
+                @Html.Label("Adresse")
+            </th>
+            <th>
+                @Html.Label("Dato")
+            </th>
+            <th>
+                @Html.Label("Beskrivelse")
+            </th>
+            @*<th>
+                    @Html.Label("Udføres")
+                </th>
+                <th>
+                    @Html.Label("Job Nr")
+                </th>
+                <th>
+                    @Html.Label("Kategori")
+                </th>*@
+            <th>
+                @Html.Label("Status")
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+
+    @foreach (var item in Model)
+    {
+        <tbody>
+            <tr>
+                <td>
+                    @Html.ActionLink(item.addresse, "Details", new { id = item.id })
+
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.dato)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.beskrivelse)
+                </td>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.udføres)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.jobnr)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Kategori.kategori1)
+                    </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.status.status1)
+                </td>
+                <td>
+                    @Html.ActionLink("Detaljer", "Details", new { id = item.id })
+                    
+                    @if (!User.Identity.IsAuthenticated)
+    {
+
+                @Html.ActionLink("Ret", "Edit", new { id = item.id });
+                @Html.ActionLink("Slet", "Delete", new { id = item.id });
+}
+
+                </td>
+            </tr>
+        </tbody>
+            }
+                      
+
+</table>
+<input type="button" value="Til toppen" class="my_btn" onclick="topFunction()" />
+<script>
+    function topFunction() {
+        document.body.scrollTop = 0; // For Safari
+        document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+    }
+</script>

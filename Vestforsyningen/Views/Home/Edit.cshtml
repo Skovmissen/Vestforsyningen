@@ -1,0 +1,91 @@
+﻿@model Vestforsyningen.Models.Opgaver
+
+@{
+    ViewBag.Title = "Ret";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Ret</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>@Html.DisplayFor(model => model.jobnr)</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.id)
+
+        <div class="form-group">
+            @Html.Label("Adresse" , new { @class = "control-label col-md-2" } )
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.addresse, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.addresse, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Dato", new { @class = "control-label col-md-2", @style = "text-transform:capitalize !important;" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.dato, new { htmlAttributes = new { @Value = Model.dato.ToString("dd-MM-yyyy"), @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.dato, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Beskrivelse",  new { @class = "control-label col-md-2", @style = "text-transform:capitalize !important;" } )
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.beskrivelse, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.beskrivelse, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Udføres", new { @class = "control-label col-md-2", @style = "text-transform:capitalize !important;" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.udføres, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.udføres, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Job nr", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.jobnr, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.jobnr, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Status", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("fk_stauts", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.fk_stauts, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Kategori", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("fk_kategori", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.fk_kategori, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Gem" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Tilbage", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

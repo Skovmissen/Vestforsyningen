@@ -1,0 +1,72 @@
+﻿@model Vestforsyningen.Models.Opgaver
+
+@{
+    ViewBag.Title = "Detaljer";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/detail.css" rel="stylesheet" />
+
+<h2>Detaljer</h2>
+
+<div>
+    <h4>@Html.DisplayFor(model => model.jobnr)</h4>
+    <hr />
+ 
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    @Html.Label("Adresse")
+                </th>
+                <th>
+                    @Html.Label("Dato")
+                </th>
+                <th>
+                    @Html.Label("Beskrivelse")
+                </th>
+                <th>
+                    @Html.Label("Udføres")
+                </th>
+                <th>
+                    @Html.Label("Job Nr")
+                </th>
+                <th>
+                    @Html.Label("Kategori")
+                </th>
+                <th>
+                    @Html.Label("Status")
+                </th>
+            </tr>
+        </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(model => model.addresse)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.dato)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.beskrivelse)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.udføres)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.jobnr)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.Kategori.kategori1)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.status.status1)
+                    </td>
+                </tr>
+            </tbody>
+
+    </table>
+</div>
+<p>
+    @Html.ActionLink("Ret", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Tilbage", "Index")
+</p>
